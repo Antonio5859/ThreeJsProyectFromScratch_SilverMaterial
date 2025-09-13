@@ -17,7 +17,23 @@ scene.add(directionalLight);
 // Crea un cubo
 const geometry = new THREE.BoxGeometry();
 // const material = new THREE.MeshBasicMaterial({ color: 0x00aaff });
-const material = new THREE.MeshStandardMaterial({ color: 0x00aaff });
+const material = new THREE.MeshStandardMaterial({ 
+    color: 0xaaaaaa,    // Light gray base
+    metalness: 1,         // No metal yet
+    roughness: 0.5       // Very rough surface
+    envMap: envMap
+ });
+const loader = new THREE.CubeTextureLoader();
+const envMap = loader.load([
+    'https://threejs.org/examples/textures/cube/Bridge2/posx.jpg',
+    'https://threejs.org/examples/textures/cube/Bridge2/negx.jpg',
+    'https://threejs.org/examples/textures/cube/Bridge2/posy.jpg',
+    'https://threejs.org/examples/textures/cube/Bridge2/negy.jpg',
+    'https://threejs.org/examples/textures/cube/Bridge2/posz.jpg',
+    'https://threejs.org/examples/textures/cube/Bridge2/negz.jpg'
+]);
+scene.background = envMap;
+
 const cube = new THREE.Mesh(geometry, material);
 scene.add(cube);
 
