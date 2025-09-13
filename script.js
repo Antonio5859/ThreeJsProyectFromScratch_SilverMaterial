@@ -5,9 +5,19 @@ const renderer = new THREE.WebGLRenderer({ antialias: true });
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
 
+// Luz ambiental suave
+const ambientLight = new THREE.AmbientLight(0xffffff, 0.5); // color, intensidad
+scene.add(ambientLight);
+
+// Luz direccional que proyecta sombras
+const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
+directionalLight.position.set(5, 10, 7.5);
+scene.add(directionalLight);
+
 // Crea un cubo
 const geometry = new THREE.BoxGeometry();
-const material = new THREE.MeshBasicMaterial({ color: 0x00aaff });
+// const material = new THREE.MeshBasicMaterial({ color: 0x00aaff });
+const material = new THREE.MeshStandardMaterial({ color: 0x00aaff });
 const cube = new THREE.Mesh(geometry, material);
 scene.add(cube);
 
@@ -26,5 +36,5 @@ animate();
 window.addEventListener('resize', () => {
     camera.aspect = window.innerWidth / window.innerHeight;
     camera.updateProjectionMatrix();
-    renderer.setSize(window.innerWidth, window.innerHeight);
 });
+    renderer.setSize(window.innerWidth, window.innerHeight);
